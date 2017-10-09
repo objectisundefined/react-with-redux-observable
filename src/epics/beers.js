@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs'
 
-import { SEARCHED_BEERS, receiveBeers, searchBeersError } from '../actions'
+import { SEARCHED_BEERS, receiveBeers, searchBeersLoading, searchBeersError } from '../actions'
 
 const beers = `https://api.punkapi.com/v2/beers`
 
@@ -14,10 +14,19 @@ const ajax = term =>
 const searchBeersEpic = action$ =>
   action$.ofType(SEARCHED_BEERS)
     .debounceTime(500)
-    .switchMap(({ payload }) =>
-      ajax(payload)
+    .filter(action => !!action.payload)
+    .switchMap(({ payload }) => {
+      const loading = Observable.of(searchBeersLoading(true))
+
+      const request = ajax(payload)
         .map(receiveBeers)
         .catch(err => Observable.of(searchBeersError(err)))
+
+      return Observable.concat(
+        loading,
+        request
+      )
+    }
   )
 
 export default searchBeersEpic 

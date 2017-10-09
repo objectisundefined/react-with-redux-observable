@@ -1,4 +1,4 @@
-import { SEARCHED_BEERS, RECEIVED_BEERS, SEARCHED_BEERS_ERROR } from '../actions'
+import { SEARCHED_BEERS, RECEIVED_BEERS, SEARCHED_BEERS_LOADING, SEARCHED_BEERS_ERROR } from '../actions'
 
 const initialState = {
   beers: [],
@@ -18,8 +18,13 @@ const beersReducer = (state = initialState, action) => {
     case RECEIVED_BEERS:
       return {
         beers: action.payload,
-        loading: false,
         messages: [],
+      }
+
+    case SEARCHED_BEERS_LOADING:
+      return {
+        ...state,
+        loading: action.payload,
       }
 
     case SEARCHED_BEERS_ERROR:
