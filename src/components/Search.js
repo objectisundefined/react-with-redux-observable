@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { searchBeers } from '../actions'
+import { searchBeers, cancelSearch} from '../actions'
 
-const Search = ({ defaultValue, messages, onChange }) =>
+const Search = ({ defaultValue, messages, onChange, loading, cancel }) =>
   <div className="Search">
     <input
       type="text"
@@ -10,6 +10,9 @@ const Search = ({ defaultValue, messages, onChange }) =>
       defaultValue={ defaultValue }
       onChange={ e => onChange(e.target.value) }
     />
+    { loading && (
+      <button type="button" onClick={ cancel }>Cancel</button> 
+    )}
     { messages.length > 0 && (
       <ul>
         { messages.map(x =>
@@ -24,13 +27,15 @@ const Search = ({ defaultValue, messages, onChange }) =>
 const mapStateToProps = state => {
   return {
     defaultValue: '',
-    messages: state.beers.messages
+    messages: state.beers.messages,
+    loading: state.beers.loading
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onChange: query => dispatch(searchBeers(query))
+    onChange: query => dispatch(searchBeers(query)),
+    cancel: () => dispatch(cancelSearch())
   }
 }
 

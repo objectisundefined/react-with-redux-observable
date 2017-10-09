@@ -83,6 +83,7 @@ export const SEARCHED_BEERS = 'SEARCHED_BEERS'
 export const RECEIVED_BEERS = 'RECEIVED_BEERS'
 export const SEARCHED_BEERS_LOADING = 'SEARCHED_BEERS_LOADING'
 export const SEARCHED_BEERS_ERROR = 'SEARCHED_BEERS_ERROR'
+export const CANCEL_SEARCH = 'CANCEL_SEARCH'
 
 export const searchBeers = query => {
   return {
@@ -111,3 +112,5 @@ export const searchBeersError = err => {
     payload: err.message
   }
 }
+
+export const cancelSearch = () => ({ type: CANCEL_SEARCH })

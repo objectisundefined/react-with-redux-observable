@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs'
 
-import { SEARCHED_BEERS, receiveBeers, searchBeersLoading, searchBeersError } from '../actions'
+import { SEARCHED_BEERS, CANCEL_SEARCH, receiveBeers, searchBeersLoading, searchBeersError } from '../actions'
 
 const beers = `https://api.punkapi.com/v2/beers`
 
@@ -19,6 +19,7 @@ const searchBeersEpic = action$ =>
       const loading = Observable.of(searchBeersLoading(true))
 
       const request = ajax(payload)
+        .takeUntil(action$.ofType(CANCEL_SEARCH))
         .map(receiveBeers)
         .catch(err => Observable.of(searchBeersError(err)))
 
