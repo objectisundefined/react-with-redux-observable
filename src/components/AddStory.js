@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react'
+import { connect } from 'react-redux'
 
-import { NEW_ITEM, UPDATE_ITEM_TEXT } from "../actions";
+import { NEW_ITEM, UPDATE_ITEM_TEXT } from '../actions'
 
 const AddStory = ({ text, update, add }) => {
   return (

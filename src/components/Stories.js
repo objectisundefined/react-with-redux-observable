@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react'
+import { connect } from 'react-redux'
 import { fetchStoriesAction } from '../actions'
 
 const Story = props =>
@@ -27,7 +27,7 @@ export const Stories = props =>
     </div>
   )
 
-const mapStateToProps = state => state.stories;
+const mapStateToProps = state => state.stories
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -35,4 +35,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Stories);
+export default connect(mapStateToProps, mapDispatchToProps)(Stories)

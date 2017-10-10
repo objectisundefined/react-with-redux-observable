@@ -1,25 +1,26 @@
-import { createStore, compose, applyMiddleware } from "redux";
-import { createLogger } from 'redux-logger';
-import { createEpicMiddleware } from 'redux-observable';
+import React from 'react'
+import { createStore, compose, applyMiddleware } from 'redux'
+import { createLogger } from 'redux-logger'
+import { createEpicMiddleware } from 'redux-observable'
 
 import { ajax } from 'rxjs/observable/dom/ajax'
 
-import rootReducer from './reducers';
+import rootReducer from './reducers'
 import rootEpic from './epics'
 
-// import { createDevTools } from 'redux-devtools';
-// import LogMonitor from 'redux-devtools-log-monitor';
-// import DockMonitor from 'redux-devtools-dock-monitor';
+// import { createDevTools } from 'redux-devtools'
+// import LogMonitor from 'redux-devtools-log-monitor'
+// import DockMonitor from 'redux-devtools-dock-monitor'
 
 /*
-const DevTools = createDevTools(
+export const DevTools = createDevTools(
   <DockMonitor
     toggleVisibilityKey='ctrl-h'
     changePositionKey='ctrl-q'
   >
     <LogMonitor />
   </DockMonitor>
-);
+)
 */
 
 const configureStore = deps => {
@@ -32,7 +33,7 @@ const configureStore = deps => {
 
   const store = createStore(
     rootReducer,
-    compose(applyMiddleware(createLogger(), epicMiddleware) /*, DevTools.instrument(), */)
+    compose(applyMiddleware(createLogger(), epicMiddleware)/*, DevTools.instrument(), */)
   )
 
   /*
